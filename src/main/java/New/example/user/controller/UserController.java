@@ -53,12 +53,12 @@ public class UserController {
         String emailRegex = "[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}";
         return email.matches(emailRegex);
     }
+
+
     @GetMapping("/login")
     public String getLoginPage(){
         return "/login";
     }
-
-
     @PostMapping("/login")
     public String loginUser(@RequestParam String email, @RequestParam String password) {
         boolean isAuthenticated = userService.authenticate(email, password);
@@ -71,5 +71,9 @@ public class UserController {
     @GetMapping("/dashboard")
     public String getDashboardPage() {
         return "dashboard";
+    }
+    @GetMapping("index")
+    public String getIndexpage(){
+        return "index";
     }
 }
