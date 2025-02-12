@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"> <!-- Add Thymeleaf namespace -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="../static/styles.css">
+    <link rel="stylesheet" th:href="@{/styles.css}"> <!-- Corrected CSS path -->
 </head>
 <body>
 <div class="login-container">
@@ -18,10 +18,10 @@
             <label for="password">Password</label>
             <input type="password" id="password" name="password" required placeholder="Enter your password">
         </div>
-        <button type="register">Login</button>
+        <button type="submit">Login</button> <!-- Changed type="register" to type="submit" -->
     </form>
-    <p>Don't have an account? <a href="register.html">Register</a></p>
+    <p>Don't have an account? <a href="register">Register</a></p> <!-- Corrected register link -->
 </div>
-<script src="../static/scripts.js"></script>
+<script th:src="@{/scripts.js}"></script> <!-- Corrected JavaScript path -->
 </body>
 </html>
