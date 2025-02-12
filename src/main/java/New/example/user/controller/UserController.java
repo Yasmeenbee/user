@@ -21,10 +21,12 @@ public class UserController {
     @Autowired
     private OTPService otpService;
 
-//    @GetMapping("/register")
-//    public String showRegistrationPage(Model model) {
-//        return "register";
-//    }
+    @GetMapping("/register")
+    public String showRegistrationPage(Model model) {
+        User user = new User();
+        model.addAttribute("user",user);
+        return "register";
+    }
     @PostMapping("/register")
     public String registerUser(@ModelAttribute User user, Model model) {
         if (user.getEmail() == null || user.getEmail().isEmpty()) {
@@ -43,7 +45,7 @@ public class UserController {
 
         emailService.sendConfirmationEmail(user.getEmail());
 
-        return "redirect:/login";
+        return "login";
     }
 
 
@@ -51,18 +53,23 @@ public class UserController {
         String emailRegex = "[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}";
         return email.matches(emailRegex);
     }
+    @GetMapping("/login")
+    public String getLoginPage(){
+        return "/login";
+    }
+
 
     @PostMapping("/login")
     public String loginUser(@RequestParam String email, @RequestParam String password) {
         boolean isAuthenticated = userService.authenticate(email, password);
         if (isAuthenticated) {
-            return "redirect:/dashboard";
+            return "dashboard";
         }
         return "login";
     }
 
-    @GetMapping("/temp")
-    public String getTemp() {
-        return "hello";
+    @GetMapping("/dashboard")
+    public String getDashboardPage() {
+        return "dashboard";
     }
 }
